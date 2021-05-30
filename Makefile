@@ -1,5 +1,5 @@
-C_SOURCES = $(wildcard kernel/*.c drivers/*.c)
-HEADERS = $(wildcard kernel/*.h drivers/*.h)
+C_SOURCES = $(wildcard kernel/*.c drivers/*.c cpu/*.c libc/*.c)
+HEADERS = $(wildcard kernel/*.h drivers/*.h cpu/*.h libc/*.h)
 # Nice syntax for file extension replacement
 OBJ = ${C_SOURCES:.c=.o}
 
@@ -9,7 +9,7 @@ GDB = i386-elf-gdb
 all: os-image
 
 run: all
-	bochs
+	bochs -f bochs.txt
 
 os-image: boot/boot_sect.bin kernel.bin
 	cat $^ > os-image
@@ -31,4 +31,4 @@ kernel.elf: boot/kernel_entry.o ${OBJ}
 
 clean:
 	rm -fr *.bin *.dis *.o os-image
-	rm -fr kernel/*.o boot/*.bin drivers/*.o
+	rm -fr kernel/*.o boot/*.bin drivers/*.o cpu/*.o libc/*.o

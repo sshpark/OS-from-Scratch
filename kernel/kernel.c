@@ -1,6 +1,8 @@
-// 内核程序
-// 打印一个 X 在左上角
+#include "../drivers/screen.h"
+
 void kernel_main() {
-    char *video_mem = (char *) 0xb8000;
-    *video_mem = 'X';
+    
+    // 在第三行打印 Hello world
+    char *msg = "Hello World";
+    print_at(msg, 0, 3);
 }
